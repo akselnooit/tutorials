@@ -7,6 +7,7 @@ $(document).ready(function() {
   function aktualizujStatus () {
     $('#status-gry').html('Znaleziono: '+liczbaZnalezionych+', Próby: '+liczbaProb);
   }
+  aktualizujStatus();
 
   // Przy kliknięciu w element o klasie przeslona, uruchamiamy poniższy kod
   $('.przeslona').click(function() {
@@ -15,20 +16,19 @@ $(document).ready(function() {
 
     // Sprawdzamy jaki numer klocka został kliknięty. Pobieramy ojca przesłony, czyli element nad przesłoną
     var kliknietyKlocek = $(this).parent().attr('mem-number');
+    console.log('Kliknięto klocek o numerze: ' + kliknietyKlocek);
 
     if (wybranyKlocek == 0) {
         // Jeżeli żaden klocek nie był jeszcze wybrany, to przypisujemy numer wybranego klocka
       wybranyKlocek = kliknietyKlocek;
-    } else if (wybranyKlocek == kliknietyKlocek) {
+    }
+    else if (wybranyKlocek == kliknietyKlocek) {
       // Jeżeli wybrany wcześniej klocek ma ten sam numer, co kliknięty klocek, to znaleźliśmy parę
       liczbaZnalezionych++;
       liczbaProb++;
 
       $('#informacja-znaleziono').slideDown();
       setTimeout(function() {
-        // Ukrywany każdy klocek, którego atrybut mem-number jest równy numerowi wybranego klocka
-        // $('[mem-number='+kliknietyKlocek+'] img').fadeOut();
-        $('[mem-number='+kliknietyKlocek+'] .przeslona').remove();
         $('#informacja-znaleziono').slideUp();
         if (liczbaZnalezionych == 7) {
           alert('Udało Ci się znaleźć wszystkie pary, gratulacje!');
