@@ -1,0 +1,66 @@
+html {
+  background: #E5EEC1;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  margin: auto;
+}
+img {
+  height: auto;
+  width: auto;
+}
+.clear { clear: both; }
+#pasek-tlo {
+  background: #5A5050;
+}
+#pasek {
+  display: block;
+  padding: 5px;
+  margin: 0;
+  color: #A2D4AB;
+  font-weight: 700;
+  font-size: 25px;
+  max-width: 1200px;
+  margin: auto;
+}
+#powitanie { float: left; }
+#status-gry { float: right; }
+#gra {
+  max-width: 1200px;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+#informacja-znaleziono {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  z-index: 2;
+  background: #5A5050;
+  text-align: center;
+  padding: 5px;
+  color: #A2D4AB;
+  font-size: 20px;
+  padding: 20px;
+  display: none;
+}
+.klocek {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  height: 150px;
+  width: 150px;
+}
+.klocek img {
+  height: 100%;
+  max-width: 100%;
+}
+.klocek .przeslona {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: #547A82;
+  cursor: pointer;
+}
