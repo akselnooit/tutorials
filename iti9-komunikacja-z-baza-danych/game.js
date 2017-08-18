@@ -7,6 +7,9 @@ $(document).ready(function() {
   var liczbaKlockow = 0;
 
   function inicjalizacjaGry() {
+    // Pierwszą czynnością inicjalizacji gry jest zresetowanie kolejności na serwerze
+    $.get('serwer.php?opcja=zresetuj_gre');
+
     wybranyKlocekId = 0;
     wybranyKlocekNumer = 0;
     liczbaZnalezionych = 0;
@@ -49,8 +52,19 @@ $(document).ready(function() {
             setTimeout(function() {
               $('#informacja-znaleziono').slideUp();
               if (liczbaZnalezionych == liczbaKlockow/2) {
-                alert('Udało Ci się znaleźć wszystkie pary, gratulacje!');
-                inicjalizacjaGry();
+                var imie = prompt('Udało Ci się znaleźć wszystkie pary, gratulacje! Aby zapisać wynik, podaj swoje imię', 'Jan Kowalski');
+                if (imie != null && imie != '') {
+                  // Dodajemy wynik gracza do bazy danych
+                  var liczba_bledow = (liczbaProb-liczbaZnalezionych);
+                  $.get('serwer.php?opcja=dodaj_wynik&imie='+imie+'&liczba_bledow='+liczba_bledow, function (dane){
+                    alert('Wynik został zapisany. Twój wynik to '+liczba_bledow+' błędów. Spróbuj ponownie :)');
+                    // Po zapisaniu wyniku resetujemy grę
+                    inicjalizacjaGry();
+                  });
+                } else {
+                  // Jeżeli użytkownik nie podał imienia, to resetujemy grę bez zapisywania wyniku
+                  inicjalizacjaGry();
+                }
               }
             }, 2000);
             wybranyKlocekId = 0;
